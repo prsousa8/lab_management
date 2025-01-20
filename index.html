@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Management</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+    <h1>Laboratório de Informática - Gerenciamento de presença</h1>
+
+    <section id="banner">
+        <div id="campo-pesquisa" style="display: flex; flex-direction: column;">
+            <h3 style="color: #ff6347;">Registre sua presença ao entrar e sair do laboratório para manter o controle
+                adequado de uso. Esse
+                processo é importante para a organização e para garantir o uso eficiente dos recursos do laboratório.
+            </h3>
+            <div style="display: flex; align-items: center; margin: 0;">
+                <input type="text" id="filtro-matricula" placeholder="Matrícula">
+                <label for="filtro-matricula" style="margin-left: -35px; margin-top: 5px;"><img src="assets/key.svg"
+                        alt="" style="width: 37px;"></label>
+                <select name="computador-seletor" id="computador-seletor"
+                    style="display: none; width: 170px; margin-top: 10px; margin-left: 15px;">
+                    <option value="">Escolha o computador</option>
+                </select>
+            </div>
+
+            <ul id="filtro-alunos"></ul>
+        </div>
+        <img src="assets/Webinar-cuate.svg" alt="woman and computer" style="width: 400px;">
+    </section>
+
+    <section id="campo-geral">
+        <table id="campo-alunos">
+            <thead>
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Nome</th>
+                    <th>Computador</th>
+                    <th>Data</th>
+                    <th>Entrada</th>
+                    <th>Saída</th>
+                    <th></th>
+                </tr>
+            <tbody></tbody>
+            </thead>
+        </table>
+
+        <form id="meu-formulario">
+            <h3>Cadastro de Aluno</h3>
+            <label for="matricula">Matrícula:</label>
+            <input type="text" id="matricula" name="matricula" minlength="6" placeholder="Matrícula">
+            <span id="erro-matricula"></span>
+
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome...">
+            <span id="erro-nome"></span>
+
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <button type="submit">Cadastrar</button>
+                <button id="limpar" type="button" style="background-color: red;">Limpar</button>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <h4>Desenvolvido por Paulo Ricardo</h4>
+        <div id="redes-sociais">
+            <a href="https://github.com/prsousa8" target="_blank"><img src="assets/icons8-github.svg"
+                    alt="icon-github"></a>
+            <a href="https://www.linkedin.com/in/pauloricardo8/" target="_blank"><img src="assets/icons8-linkedin.svg"
+                    alt="icon-linkedin"></a>
+            <a href="https://www.instagram.com/pauloricardo_176/" target="_blank"><img src="assets/icons8-instagram.svg"
+                    alt="icon-instagram"></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
