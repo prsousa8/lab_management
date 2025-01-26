@@ -143,26 +143,6 @@
   ],
   "presenca": [
     {
-      "id": "e883",
-      "matricula": "4957577",
-      "nome": "Paulo Ricardo dos Santos Sousa",
-      "computador": "9",
-      "data": "26/01/2025",
-      "entrada": "18:47",
-      "saida": "19:47",
-      "booleano": false
-    },
-    {
-      "id": "07a5",
-      "matricula": 495757,
-      "nome": "Paulo Ricardo",
-      "computador": "6",
-      "data": "26/01/2025",
-      "entrada": "18:47",
-      "saida": "19:47",
-      "booleano": false
-    },
-    {
       "id": "09a4",
       "matricula": "344566",
       "nome": "Paulo Ricardo dos Santos Sousa",
@@ -183,16 +163,6 @@
       "booleano": true
     },
     {
-      "id": "46a8",
-      "matricula": "344568",
-      "nome": "Paulo Ricardo dos Santos Sousa",
-      "computador": "1",
-      "data": "26/01/2025",
-      "entrada": "18:48",
-      "saida": "19:47",
-      "booleano": false
-    },
-    {
       "id": "b7e9",
       "matricula": "3445687",
       "nome": "Paulo Ricardo dos Santos Sousa",
@@ -211,13 +181,22 @@
       "entrada": "18:48",
       "saida": "",
       "booleano": true
+    },
+    {
+      "id": "efde",
+      "matricula": "49575",
+      "nome": "Paulo Ricardo dos Santos Sousa",
+      "computador": "10",
+      "data": "26/01/2025",
+      "entrada": "20:39",
+      "saida": "",
+      "booleano": true
     }
   ],
   "computadoresDisponiveis": {
     "id": 1,
     "lista": [
       "1",
-      "10",
       "2",
       "3",
       "5",
