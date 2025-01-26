@@ -1,18 +1,14 @@
-# Sejam Bem-vindos ao meu Portfólio!
+<h1 align="center">Sejam Bem-vindos ao meu Portfólio!</h1>
 
-Este sistema foi desenvolvido para facilitar o acompanhamento das atividades dos estudantes no laboratório de informática, garantindo organização, eficiência e praticidade no controle de uso dos recursos disponíveis. Os estudantes podem ser cadastrados rapidamente, com detalhes como matrícula, nome e horário de entrada. O sistema mantém um histórico detalhado de todas as visitas. Além disso, a interface foi projetada para registrar a entrada e saída dos estudantes de forma prática e dinâmica, utilizando botões intuitivos que geram relatórios completos sobre frequência e uso.
+<p align="justify">Este sistema foi desenvolvido para facilitar o acompanhamento das atividades dos estudantes no laboratório de informática, garantindo organização, eficiência e praticidade no controle de uso dos recursos disponíveis. Os estudantes podem ser cadastrados rapidamente, com detalhes como matrícula, nome e horário de entrada. O sistema mantém um histórico detalhado de todas as visitas. Além disso, a interface foi projetada para registrar a entrada e saída dos estudantes de forma prática e dinâmica, utilizando botões intuitivos que geram relatórios completos sobre frequência e uso.</p>
 
 ## Tecnologias e Ferramentas Utilizadas 🔧
 
 Este projeto foi construído utilizando as seguintes tecnologias:
 
-- **HTML5**: Estruturação da página web. Mais detalhes sobre a especificação HTML podem ser encontrados [aqui](https://developer.mozilla.org/pt-BR/docs/Web/HTML).
-- **CSS3**: Estilização da página e layout responsivo. Mais informações sobre CSS3 estão [aqui](https://developer.mozilla.org/pt-BR/docs/Web/CSS).
-- **JavaScript**: Interatividade da aplicação. Para aprender mais sobre JavaScript, consulte [a documentação oficial](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript).
-
-![HTML5](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg)
-![CSS3](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg)
-![JavaScript](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg)
+- **HTML5**: Estruturação da página web.
+- **CSS3**: Estilização da página e layout responsivo. 
+- **JavaScript**: Interatividade da aplicação.
 
 ### SweetAlert2
 
