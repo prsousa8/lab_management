@@ -143,74 +143,14 @@
   ],
   "presenca": [
     {
-      "id": "5555",
-      "matricula": 4957,
-      "nome": "Paulo Ricardo dos Santos Sousa",
-      "computador": "8",
-      "data": "26/01/2025",
-      "entrada": "18:34",
-      "saida": "",
-      "booleano": true
-    },
-    {
-      "id": "7389",
-      "matricula": 4957576,
-      "nome": "Paulo Ricardo dos Santos Sousa",
-      "computador": "10",
-      "data": "26/01/2025",
-      "entrada": "18:35",
-      "saida": "",
-      "booleano": true
-    },
-    {
-      "id": "a906",
-      "matricula": 495750,
-      "nome": "Paulo",
-      "computador": "2",
-      "data": "26/01/2025",
-      "entrada": "18:40",
-      "saida": "",
-      "booleano": true
-    },
-    {
-      "id": "684e",
-      "matricula": 495778,
-      "nome": "Paulo",
-      "computador": "5",
-      "data": "26/01/2025",
-      "entrada": "18:41",
-      "saida": "",
-      "booleano": true
-    },
-    {
-      "id": "243f",
-      "matricula": "4957567",
-      "nome": "Paulo Ricardo dos Santos Sousa",
-      "computador": "3",
-      "data": "26/01/2025",
-      "entrada": "18:43",
-      "saida": "",
-      "booleano": true
-    },
-    {
-      "id": "f9d7",
-      "matricula": 4957575,
-      "nome": "Paulo i",
-      "computador": "7",
-      "data": "26/01/2025",
-      "entrada": "18:47",
-      "saida": "",
-      "booleano": true
-    },
-    {
       "id": "e883",
       "matricula": "4957577",
       "nome": "Paulo Ricardo dos Santos Sousa",
       "computador": "9",
       "data": "26/01/2025",
       "entrada": "18:47",
-      "saida": "",
-      "booleano": true
+      "saida": "19:47",
+      "booleano": false
     },
     {
       "id": "07a5",
@@ -219,8 +159,8 @@
       "computador": "6",
       "data": "26/01/2025",
       "entrada": "18:47",
-      "saida": "",
-      "booleano": true
+      "saida": "19:47",
+      "booleano": false
     },
     {
       "id": "09a4",
@@ -249,8 +189,8 @@
       "computador": "1",
       "data": "26/01/2025",
       "entrada": "18:48",
-      "saida": "",
-      "booleano": true
+      "saida": "19:47",
+      "booleano": false
     },
     {
       "id": "b7e9",
@@ -276,6 +216,15 @@
   "computadoresDisponiveis": {
     "id": 1,
     "lista": [
+      "1",
+      "10",
+      "2",
+      "3",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
       "Livre"
     ]
   }
