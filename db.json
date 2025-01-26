@@ -1,0 +1,282 @@
+{
+  "alunos": [
+    {
+      "matricula": 495757,
+      "nome": "Paulo Ricardo",
+      "id": "3800"
+    },
+    {
+      "matricula": 508979,
+      "nome": "Marco Aurélio",
+      "id": "9df1"
+    },
+    {
+      "id": "ab72",
+      "matricula": 495750,
+      "nome": "Paulo"
+    },
+    {
+      "id": "6587",
+      "matricula": 495778,
+      "nome": "Paulo"
+    },
+    {
+      "id": "6286",
+      "matricula": 497878,
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "4c9d",
+      "matricula": 4957576,
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "4c1d",
+      "matricula": 4957,
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "f887",
+      "matricula": 4957575,
+      "nome": "Paulo i"
+    },
+    {
+      "id": "13f8",
+      "matricula": 49,
+      "nome": "Paulo ui"
+    },
+    {
+      "id": "fcbb",
+      "matricula": 66769099,
+      "nome": "fgwheifgfj jhrghiwer"
+    },
+    {
+      "id": "0c2c",
+      "matricula": "567889",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "6c4c",
+      "matricula": "373737",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "97ed",
+      "matricula": "344566",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "644d",
+      "matricula": "4957567",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "af5e",
+      "matricula": "344568",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "25ee",
+      "matricula": "3737376",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "eacb",
+      "matricula": "4957577",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "bcf9",
+      "matricula": "3445687",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "7f4d",
+      "matricula": "3737377",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "463f",
+      "matricula": "3737375",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "89c5",
+      "matricula": "4957556",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "5a3d",
+      "matricula": "37373745",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "2f6f",
+      "matricula": "4957545",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "84df",
+      "matricula": "49575789",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "cd25",
+      "matricula": "49575456",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "3c5f",
+      "matricula": "49575",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "da97",
+      "matricula": "49575666",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    },
+    {
+      "id": "2eb1",
+      "matricula": "4444",
+      "nome": "Paulo Ricardo dos Santos Sousa"
+    }
+  ],
+  "presenca": [
+    {
+      "id": "5555",
+      "matricula": 4957,
+      "nome": "Paulo Ricardo dos Santos Sousa",
+      "computador": "8",
+      "data": "26/01/2025",
+      "entrada": "18:34",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "7389",
+      "matricula": 4957576,
+      "nome": "Paulo Ricardo dos Santos Sousa",
+      "computador": "10",
+      "data": "26/01/2025",
+      "entrada": "18:35",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "a906",
+      "matricula": 495750,
+      "nome": "Paulo",
+      "computador": "2",
+      "data": "26/01/2025",
+      "entrada": "18:40",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "684e",
+      "matricula": 495778,
+      "nome": "Paulo",
+      "computador": "5",
+      "data": "26/01/2025",
+      "entrada": "18:41",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "243f",
+      "matricula": "4957567",
+      "nome": "Paulo Ricardo dos Santos Sousa",
+      "computador": "3",
+      "data": "26/01/2025",
+      "entrada": "18:43",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "f9d7",
+      "matricula": 4957575,
+      "nome": "Paulo i",
+      "computador": "7",
+      "data": "26/01/2025",
+      "entrada": "18:47",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "e883",
+      "matricula": "4957577",
+      "nome": "Paulo Ricardo dos Santos Sousa",
+      "computador": "9",
+      "data": "26/01/2025",
+      "entrada": "18:47",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "07a5",
+      "matricula": 495757,
+      "nome": "Paulo Ricardo",
+      "computador": "6",
+      "data": "26/01/2025",
+      "entrada": "18:47",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "09a4",
+      "matricula": "344566",
+      "nome": "Paulo Ricardo dos Santos Sousa",
+      "computador": "Livre",
+      "data": "26/01/2025",
+      "entrada": "18:48",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "383d",
+      "matricula": "373737",
+      "nome": "Paulo Ricardo dos Santos Sousa",
+      "computador": "Livre",
+      "data": "26/01/2025",
+      "entrada": "18:48",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "46a8",
+      "matricula": "344568",
+      "nome": "Paulo Ricardo dos Santos Sousa",
+      "computador": "1",
+      "data": "26/01/2025",
+      "entrada": "18:48",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "b7e9",
+      "matricula": "3445687",
+      "nome": "Paulo Ricardo dos Santos Sousa",
+      "computador": "2",
+      "data": "26/01/2025",
+      "entrada": "18:48",
+      "saida": "",
+      "booleano": true
+    },
+    {
+      "id": "1aae",
+      "matricula": "3737376",
+      "nome": "Paulo Ricardo dos Santos Sousa",
+      "computador": "4",
+      "data": "26/01/2025",
+      "entrada": "18:48",
+      "saida": "",
+      "booleano": true
+    }
+  ],
+  "computadoresDisponiveis": {
+    "id": 1,
+    "lista": [
+      "Livre"
+    ]
+  }
+}

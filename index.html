@@ -7,6 +7,7 @@
     <title>Lab Management</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 
 </head>
 
@@ -50,7 +51,7 @@
             </thead>
         </table>
 
-        <form id="meu-formulario">
+        <form id="meu-formulario" novalidate>
             <h3>Cadastro de Aluno</h3>
             <label for="matricula">Matrícula:</label>
             <input type="text" id="matricula" name="matricula" minlength="6" placeholder="Matrícula">
@@ -78,8 +79,8 @@
                     alt="icon-instagram"></a>
         </div>
     </footer>
-
     <script src="script.js"></script>
+    
 </body>
 
 </html>

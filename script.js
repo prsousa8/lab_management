@@ -1,263 +1,311 @@
-const alunos = [
-    { matricula: 495757, nome: "Paulo Ricardo" },
-    { matricula: 508979, nome: "Marco Aurélio" }
-];
+// Corrige o evento dos botões e o uso do alunoPresenca
+const apiURL = "http://localhost:3000"; // URL base do json-server
+var computadoresDisponiveis = [];
 
-// Lista de presença inicial vazia
-const presenca = [];
+document.addEventListener("DOMContentLoaded", async () => {
+    const res = await fetch(`${apiURL}/computadoresDisponiveis?id=1`);
+    const data = await res.json();
+    computadoresDisponiveis = data.lista;
 
-const computadoresDisponiveis = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Livre"];
 
-const campoAlunos = document.querySelector("tbody");
-const computadorSeletor = document.getElementById("computador-seletor");
-const input = document.getElementById("filtro-matricula");
-const ul = document.getElementById("filtro-alunos");
 
-// Renderiza a lista de alunos presentes
-function entradaESaida(aluno) {
-    const corBotao = aluno.booleano ? "#e0b0ff" : "#1aff1f";
-    const textoBotao = aluno.booleano ? "Registrar saída" : "Remover da lista";
-    return `<button class="btnRegistrar" style="background-color: ${corBotao};" data-id="${aluno.matricula}">${textoBotao}</button>`;
-}
+    // Renderiza a lista de presença
+    async function renderizar() {
+        const campoAlunos = document.querySelector("tbody");
 
-function renderizar() {
-    campoAlunos.innerHTML = "";
-    presenca.forEach(alunoPresenca => {
-        campoAlunos.innerHTML += `
+        const presencaRes = await fetch(`${apiURL}/presenca`);
+        const presenca = await presencaRes.json();
+
+        campoAlunos.innerHTML = "";
+        presenca.forEach(alunoPresenca => {
+            campoAlunos.innerHTML += `
         <tr>
-            <td>${alunoPresenca.matricula}</td>  
+            <td>${alunoPresenca.matricula}</td>
             <td>${alunoPresenca.nome}</td>
-            <td>${alunoPresenca.computador}</td>   
-            <td>${alunoPresenca.data} </td>  
-            <td>${alunoPresenca.entrada}</td>   
-            <td>${alunoPresenca.saida}</td>  
-            <td>${entradaESaida(alunoPresenca)}</td> </tr>`;
-    });
-
-    const botoes = campoAlunos.querySelectorAll(".btnRegistrar");
-    botoes.forEach(botao => {
-        botao.addEventListener("click", function () {
-            const matricula = parseInt(this.getAttribute("data-id"));
-            alternarBooleano(matricula);
+            <td>${alunoPresenca.computador}</td>
+            <td>${alunoPresenca.data}</td>
+            <td>${alunoPresenca.entrada}</td>
+            <td>${alunoPresenca.saida}</td>
+            <td>${gerarBotaoEntradaESaida(alunoPresenca)}</td>
+        </tr>`;
         });
-    });
-}
 
-function alternarBooleano(matricula) {
-    const alunoPresenca = presenca.find(p => p.matricula === matricula);
-    if (alunoPresenca) {
+        document.querySelectorAll(".btnRegistrar").forEach(botao => {
+            botao.addEventListener("click", async (event) => {
+                const matricula = botao.dataset.id;
+                await alternarBooleano(matricula);
+            });
+        });
+    }
+
+    function gerarBotaoEntradaESaida(aluno) {
+        const corBotao = aluno.booleano ? "#e0b0ff" : "#1aff1f";
+        const textoBotao = aluno.booleano ? "Registrar saída" : "Remover da lista";
+        return `<button class="btnRegistrar" style="background-color: ${corBotao};" data-id="${aluno.matricula}">${textoBotao}</button>`;
+    }
+
+    // Alterna entre registrar saída ou remover o aluno da lista de presença
+    async function alternarBooleano(matricula) {
+        const res = await fetch(`${apiURL}/presenca?matricula=${matricula}`);
+        const alunoPresencaArray = await res.json();
+        const alunoPresenca = alunoPresencaArray[0]; // Corrige para acessar o primeiro item
+
         if (alunoPresenca.booleano) {
             // Registrar saída
-            alunoPresenca.saida = new Date().toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' });
-            if (alunoPresenca.computador !== "Livre") {
-                computadoresDisponiveis.push(alunoPresenca.computador);
-            }
-            computadoresDisponiveis.sort();
-            alunoPresenca.booleano = false;
-        } else {
-            // Remover aluno da lista de presença
-            const index = presenca.findIndex(p => p.matricula === matricula);
-            if (index !== -1) presenca.splice(index, 1);
-        }
-        renderizar(); // Atualiza a lista renderizada
-    }
-}
+            const computador = alunoPresenca.computador;
+            const updateData = {
+                ...alunoPresenca,
+                saida: new Date().toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' }),
+                booleano: false
+            };
 
-// Adiciona aluno à lista de presença ao clicar no filtro
-function adicionarPresencaDinamico(matricula) {
-    if (!presenca.some(p => p.matricula === matricula)) {
-        const aluno = alunos.find(a => a.matricula === matricula);
-        if (aluno) {
-            computadorSeletor.style.display = "block";
-
-            // Limpa as opções do seletor antes de adicionar as novas
-            computadorSeletor.innerHTML = '<option value="">Selecione um computador</option>';
-
-            computadoresDisponiveis.forEach(pc => {
-                computadorSeletor.innerHTML += `<option value="${pc}">${pc}</option>`;
+            await fetch(`${apiURL}/presenca/${alunoPresenca.id}`, { // Corrige o endpoint
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updateData)
             });
 
-            // Exibir o seletor e registrar a presença após a escolha
-            document.getElementById("campo-pesquisa").appendChild(computadorSeletor);
+            // Libera o computador (se não for "Livre")
+            if (computador !== "Livre") {
+                computadoresDisponiveis.push(computador);
+                computadoresDisponiveis.sort();
 
-            computadorSeletor.addEventListener("change", () => {
-                const computador = computadorSeletor.value;
-                if (computador) {
-                    presenca.push({
-                        matricula: aluno.matricula,
-                        nome: aluno.nome,
-                        computador: computador,
-                        booleano: true,
-                        data: new Date().toLocaleDateString("pt-BR"),
-                        entrada: new Date().toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' }),
-                        saida: ""
-                    });
-
-                    computadorSeletor.style.display = "none";
-                    ul.style.display = "none";
-                    input.value = "";
-                    renderizar();
-
-                    // Remove o computador escolhido do array apenas se não for "Livre"
-                    if (computador !== "Livre") {
-                        computadoresDisponiveis.splice(computadoresDisponiveis.indexOf(computador), 1);
-                    }
-                }
-            }, { once: true }); // Adiciona o evento de mudança uma única vez
-        }
-    }
-}
-
-
-// Filtro de pesquisa e clique
-
-input.addEventListener("keyup", function () {
-    const keyword = input.value.toLowerCase();
-
-    if (keyword === "") {
-        ul.innerHTML = ""; // Limpa a lista se o campo de busca estiver vazio
-    } else {
-        const filteredUsers = alunos.filter(aluno =>
-            aluno.matricula.toString().includes(keyword) &&
-            !presenca.some(p => p.matricula === aluno.matricula) // Verifica se o aluno já não está na lista de presença
-        );
-        renderLists(filteredUsers); // Renderiza apenas os resultados filtrados
-
-        ul.style.display = "block";
-    }
-});
-
-function renderLists(alunosFiltrados) {
-    ul.innerHTML = "";
-    alunosFiltrados.forEach(aluno => {
-        ul.innerHTML += `
-            <li class="aluno-item" data-id="${aluno.matricula}">
-                Aluno: ${aluno.matricula} ${aluno.nome}
-            </li>`;
-    });
-
-    // Torna os itens clicáveis
-    const items = ul.querySelectorAll(".aluno-item");
-    items.forEach(item => {
-        item.addEventListener("click", function () {
-            const matricula = parseInt(this.getAttribute("data-id"));
-            adicionarPresencaDinamico(matricula);
-        });
-    });
-}
-
-
-// Tratamento de erros
-const formCadastro = document.querySelector("#meu-formulario");
-const camposObrigatorios = ["matricula", "nome"]; // IDs dos campos obrigatórios
-
-const matricula = document.getElementById("matricula");
-const erroMatricula = document.getElementById("erro-matricula");
-
-matricula.oninput = function (event) {
-    if (!/^\d+$/.test(matricula.value)) {
-        erroMatricula.innerHTML = "A matrícula deve conter apenas números.";
-    } else if (verificarMatricula(matricula.value)) {
-        erroMatricula.innerHTML = "A matrícula já existe.";
-    } else {
-        erroMatricula.innerHTML = ""; // Limpa a mensagem de erro quando o tamanho for suficiente
-    }
-};
-
-function verificarMatricula(matriculaValor) {
-    return alunos.some(aluno => aluno.matricula === parseInt(matriculaValor));
-}
-
-const nome = document.getElementById("nome");
-const erroNome = document.getElementById("erro-nome");
-
-nome.oninput = function () {
-    // Validação do nome
-    if (nome.value.trim().split(" ").length < 2) {
-        erroNome.innerHTML = "O nome deve conter pelo menos dois nomes.";
-    } else if (!nome.value.match(/^[A-Za-z\s]+$/)) {
-        erroNome.innerHTML = "O nome deve conter apenas letras e espaços.";
-    } else if (nome.value.length > 50) {
-        erroNome.innerHTML = "O nome deve ter no máximo 50 caracteres.";
-    } else {
-        erroNome.innerHTML = ""; // Limpa a mensagem de erro
-    }
-};
-
-
-formCadastro.addEventListener("submit", event => {
-    event.preventDefault(); // Impede o envio padrão do formulário
-
-    let temErro = false;
-
-    // Valida campos obrigatórios
-    camposObrigatorios.forEach(campoId => {
-        const campo = document.getElementById(campoId);
-        const erroCampo = document.getElementById(`erro-${campoId}`);
-
-        if (!campo.value.trim()) {
-            erroCampo.innerHTML = `O campo ${campoId} é obrigatório.`;
-            temErro = true;
+                // Atualiza a lista de computadores disponíveis no servidor
+                await fetch(`${apiURL}/computadoresDisponiveis?id=1`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ id: 1, lista: computadoresDisponiveis })
+                });
+            }
         } else {
-            erroCampo.innerHTML = ""; // Limpa mensagens de erro anteriores
+            // Remove da lista de presença
+            await fetch(`${apiURL}/presenca/${alunoPresenca.id}`, { method: "DELETE" });
+        }
+
+    }
+
+    // Adiciona aluno à lista de presença
+    async function adicionarPresencaDinamico(matricula) {
+        const res = await fetch(`${apiURL}/alunos?matricula=${matricula}`);
+        const alunoArray = await res.json();
+        const aluno = alunoArray[0]; // Corrige para acessar o primeiro item
+
+        const computadorSeletor = document.getElementById("computador-seletor");
+        computadorSeletor.style.display = "block";
+        console.log("Computadores disponíveis antes:", computadoresDisponiveis);
+        computadorSeletor.innerHTML = '<option value="">Selecione um computador</option>';
+        computadoresDisponiveis.forEach(pc => {
+            computadorSeletor.innerHTML += `<option value="${pc}">${pc}</option>`;
+        });
+
+        computadorSeletor.addEventListener("change", async () => {
+            const computador = computadorSeletor.value;
+
+            if (computador) {
+                const presencaData = {
+                    matricula: aluno.matricula,
+                    nome: aluno.nome,
+                    computador: computador,
+                    data: new Date().toLocaleDateString("pt-BR"),
+                    entrada: new Date().toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' }),
+                    saida: "",
+                    booleano: true
+                };
+
+                await fetch(`${apiURL}/presenca`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(presencaData)
+                });
+
+                // Verifica se o computador está na lista e o remove
+                const index = computadoresDisponiveis.indexOf(computador);
+                if (computador !== "Livre") {
+                    computadoresDisponiveis.splice(index, 1); // Remove o computador da lista
+
+                    // Atualiza a lista de computadores disponíveis no servidor
+                    await fetch(`${apiURL}/computadoresDisponiveis?id=1`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ id: 1, lista: computadoresDisponiveis })
+                    });
+                }
+                console.log("Computadores disponíveis depos:", computadoresDisponiveis);
+                computadorSeletor.style.display = "none";
+            }
+        }, { once: true });
+    }
+
+    // Filtro de alunos no input
+    document.getElementById("filtro-matricula").addEventListener("keyup", async function () {
+        const keyword = this.value.toLowerCase();
+        const ul = document.getElementById("filtro-alunos");
+
+        if (keyword === "") {
+            ul.innerHTML = "";
+            ul.style.display = "none";
+        } else {
+            const resAlunos = await fetch(`${apiURL}/alunos`);
+            const alunos = await resAlunos.json();
+
+            const resPresenca = await fetch(`${apiURL}/presenca`);
+            const presenca = await resPresenca.json();
+
+            const alunosFiltrados = alunos.filter(aluno =>
+                aluno.matricula.toString().includes(keyword) &&
+                !presenca.some(p => p.matricula === aluno.matricula)
+            );
+
+            ul.innerHTML = "";
+            alunosFiltrados.forEach(aluno => {
+                ul.innerHTML += `
+            <li class="aluno-item" data-id="${aluno.matricula}">
+                ${aluno.matricula} - ${aluno.nome}
+            </li>`;
+            });
+
+            ul.style.display = "block";
+
+            ul.querySelectorAll(".aluno-item").forEach(item => {
+                item.addEventListener("click", function () {
+                    const matricula = parseInt(this.dataset.id);
+                    adicionarPresencaDinamico(matricula);
+                });
+            });
         }
     });
 
-    // Verifica se a matrícula está vazia ou já existe
-    const matriculaValor = document.getElementById("matricula").value.trim();
+
+    //Tratamento de erros
+    const matricula = document.getElementById("matricula");
     const erroMatricula = document.getElementById("erro-matricula");
 
-    if (!matriculaValor) {
-        erroMatricula.innerHTML = "O campo matrícula é obrigatório.";
-        temErro = true;
-    } else if (alunos.some(aluno => aluno.matricula === parseInt(matriculaValor))) {
-        erroMatricula.innerHTML = "A matrícula já existe.";
-        temErro = true;
-    } else {
-        erroMatricula.innerHTML = ""; // Limpa mensagem de erro se não houver problema
-    }
-
-    if (temErro) {
-        Swal.fire({
-            title: 'Cadastro não realizado!',
-            text: `O cadastro não foi possível. Tente novamente.`,
-            imageUrl: 'assets/cancelar.png', // URL da imagem
-            imageWidth: 100,
-            imageHeight: 100,
-            imageAlt: 'Ícone personalizado',
-            confirmButtonText: 'Fechar'
-        });
-        return; // Encerra a execução se houver erros
-    }
-
-    // Todos os campos estão preenchidos e matrícula não existe; adiciona ao array de alunos
-    const data = Object.fromEntries(new FormData(event.target).entries());
-
-    const novoAluno = {
-        matricula: parseInt(data.matricula),
-        nome: data.nome
+    matricula.oninput = async function (event) {
+        const res = await fetch(`${apiURL}/alunos?matricula=${matricula.value}`);
+        const aluno = await res.json();
+        console.log(aluno[0]);
+        erroMatricula.innerHTML = "";
+        if (!/^\d+$/.test(matricula.value)) {
+            erroMatricula.innerHTML = "A matrícula deve conter apenas números.";
+        } else {
+            erroMatricula.innerHTML = ""; // Limpa a mensagem de erro quando o tamanho for suficiente
+        }
     };
 
-    alunos.push(novoAluno);
-    Swal.fire({
-        title: 'Cadastro realizado!',
-        text: `O cadastro de ${novoAluno.nome} foi realizado com sucesso.`,
-        imageUrl: 'assets/sucesso.png', // URL da imagem
-        imageWidth: 100,
-        imageHeight: 100,
-        imageAlt: 'Ícone personalizado',
-        confirmButtonText: 'Fechar'
+    const nome = document.getElementById("nome");
+    const erroNome = document.getElementById("erro-nome");
+
+    nome.oninput = function () {
+        // Validação do nome
+        if (nome.value.trim().split(" ").length < 2) {
+            erroNome.innerHTML = "O nome deve conter pelo menos dois nomes.";
+        } else if (!nome.value.match(/^[A-Za-z\s]+$/)) {
+            erroNome.innerHTML = "O nome deve conter apenas letras e espaços.";
+        } else if (nome.value.length > 50) {
+            erroNome.innerHTML = "O nome deve ter no máximo 50 caracteres.";
+        } else {
+            erroNome.innerHTML = ""; // Limpa a mensagem de erro
+        }
+    };
+
+    const URL_DA_IMAGEM_DE_ERRO = "assets/cancelar.png";
+    const URL_DA_IMAGEM_DE_SUCESSO = "assets/sucesso.png";
+
+    // Validação de formulário
+    document.getElementById("meu-formulario").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const matriculaInput = document.getElementById("matricula");
+        const nomeInput = document.getElementById("nome");
+        const matricula = matriculaInput.value.trim();
+        const nome = nomeInput.value.trim();
+
+        if (!matricula || !nome) {
+            Swal.fire({
+                title: "Erro!",
+                text: "Preencha todos os campos obrigatórios.",
+                imageUrl: URL_DA_IMAGEM_DE_ERRO,
+                imageWidth: 100,
+                imageHeight: 100,
+                imageAlt: "Imagem de erro",
+            });
+            return;
+        }
+
+        const res = await fetch(`${apiURL}/alunos`);
+        const alunos = await res.json();
+
+        if (alunos.some(a => a.matricula === parseInt(matricula))) {
+            Swal.fire({
+                title: "Erro!",
+                text: "Matrícula já existe.",
+                imageUrl: URL_DA_IMAGEM_DE_ERRO,
+                imageWidth: 100,
+                imageHeight: 100,
+                imageAlt: "Imagem de erro",
+            });
+            return;
+        } else if (!/^\d+$/.test(matricula)) {
+            Swal.fire({
+                title: "Erro!",
+                text: "A matrícula deve conter apenas números.",
+                imageUrl: URL_DA_IMAGEM_DE_ERRO,
+                imageWidth: 100,
+                imageHeight: 100,
+                imageAlt: "Imagem de erro",
+            });
+            return;
+        } else if (nome.split(" ").length < 2) {
+            Swal.fire({
+                title: "Erro!",
+                text: "O nome deve conter pelo menos dois nomes.",
+                imageUrl: URL_DA_IMAGEM_DE_ERRO,
+                imageWidth: 100,
+                imageHeight: 100,
+                imageAlt: "Imagem de erro",
+            });
+            return;
+        } else if (!nome.match(/^[A-Za-z\s]+$/)) {
+            Swal.fire({
+                title: "Erro!",
+                text: "O nome deve conter apenas letras e espaços.",
+                imageUrl: URL_DA_IMAGEM_DE_ERRO,
+                imageWidth: 100,
+                imageHeight: 100,
+                imageAlt: "Imagem de erro",
+            });
+            return;
+        } else if (nome.length > 50) {
+            Swal.fire({
+                title: "Erro!",
+                text: "O nome deve ter no máximo 50 caracteres.",
+                imageUrl: URL_DA_IMAGEM_DE_ERRO,
+                imageWidth: 100,
+                imageHeight: 100,
+                imageAlt: "Imagem de erro",
+            });
+            return;
+        }
+
+        const novoAluno = { matricula, nome };
+
+        await fetch(`${apiURL}/alunos`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(novoAluno),
+        });
+        Swal.fire({
+            title: "Sucesso!",
+            text: "Aluno cadastrado com sucesso.",
+            imageUrl: URL_DA_IMAGEM_DE_SUCESSO,
+            imageWidth: 100,
+            imageHeight: 100,
+            imageAlt: "Imagem de sucesso",
+        });
     });
-    resetarForm(); // Limpa o formulário após o envio
-    renderizar(); // Atualiza a lista, se necessário
+
+    const btnLimpar = document.getElementById("limpar");
+    btnLimpar.addEventListener("click", function(){
+        document.getElementById("meu-formulario").reset();
+    })
+    renderizar();
 });
-
-const btnLimpar = document.getElementById("limpar");
-btnLimpar.addEventListener("click", resetarForm);
-
-function resetarForm(){
-    formCadastro.reset();
-}
-
-// Inicializa a renderização
-renderizar();

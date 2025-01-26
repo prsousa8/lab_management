@@ -1,0 +1,30 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Dependências do ambiente de desenvolvimento (se estiver usando)
+.vscode/
+.idea/
+
+# Arquivos de configuração locais do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de builds
+/dist
+/build
+
+# Arquivos de configurações de IDE
+/.vscode/
+/*.iml
+/.idea/
+
+# Arquivos gerados por testes
+/coverage
+
+# Arquivos de ambiente (Exemplo: .env para variáveis de ambiente)
+.env
+
+# Arquivos de logs
+*.log
