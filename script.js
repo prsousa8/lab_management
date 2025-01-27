@@ -65,6 +65,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 body: JSON.stringify(updateData)
             });
 
+            await fetch(`${apiURL}/historico`, { // Corrige o endpoint
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updateData)
+            });
+
             // Libera o computador (se não for "Livre")
             if (computador !== "Livre") {
                 computadoresDisponiveis.push(computador);

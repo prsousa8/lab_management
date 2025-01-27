@@ -43,6 +43,16 @@ input::selection {
     color: white; /* Cor do texto selecionado */
 }
 
+header{
+    margin-top: 20px;
+    text-align: center;
+}
+header a{
+    text-decoration: none;
+    color: #ff6347;
+    font-weight: bolder;
+}
+
 #banner {
     display: flex;
     justify-content: space-between;
